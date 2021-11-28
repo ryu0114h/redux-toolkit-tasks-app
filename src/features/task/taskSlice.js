@@ -95,7 +95,7 @@ const taskSlice = createSlice({
       return {
         ...state,
         tasks: state.tasks.map((t) =>
-          t.is === action.payload.id ? action.payload : t
+          t.id === action.payload.id ? action.payload : t
         ),
         selectedTask: action.payload,
       };
