@@ -5,7 +5,7 @@ const apiUrl = "http://localhost:8000/api/tasks/";
 const token = localStorage.localJWT;
 
 export const fetchAsyncGet = createAsyncThunk("task/get", async () => {
-  const res = axios.get(apiUrl, {
+  const res = await axios.get(apiUrl, {
     headers: {
       Authorization: `JWT ${token}`,
     },
@@ -14,7 +14,7 @@ export const fetchAsyncGet = createAsyncThunk("task/get", async () => {
 });
 
 export const fetchAsyncCreate = createAsyncThunk("task/post", async (task) => {
-  const res = axios.post(apiUrl, task, {
+  const res = await axios.post(apiUrl, task, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `JWT ${token}`,
@@ -34,7 +34,7 @@ export const fetchAsyncUpdate = createAsyncThunk("task/put", async (task) => {
 });
 
 export const fetchAsyncDelete = createAsyncThunk("task/delete", async (id) => {
-  await axios.put(`${apiUrl}${id}/`, {
+  await axios.delete(`${apiUrl}${id}/`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `JWT ${token}`,
