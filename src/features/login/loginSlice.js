@@ -4,7 +4,7 @@ import axios from "axios";
 const apiUrl = "http://localhost:8000/";
 const token = localStorage.localJWT;
 
-export const fetchAsychLogin = createAsyncThunk("/login/post", async (auth) => {
+export const fetchAsyncLogin = createAsyncThunk("/login/post", async (auth) => {
   const res = await axios.post(`${apiUrl}authen/jwt/create`, auth, {
     headers: {
       "Content-Type": "application/json",
@@ -56,12 +56,12 @@ const loginSlice = createSlice({
     editPassword: (state, action) => {
       state.authen.password = action.payload;
     },
-    toggleMode: (state, action) => {
+    toggleMode: (state) => {
       state.isLoginView = !state.isLoginView;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAsychLogin.fulfilled, (state, action) => {
+    builder.addCase(fetchAsyncLogin.fulfilled, (state, action) => {
       localStorage.setItem("localJWT", action.payload.access);
       action.payload.access && (window.location.href = "/tasks");
     });
